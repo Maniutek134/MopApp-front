@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TempComponent } from './temp/temp.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,7 @@ import { TempComponent } from './temp/temp.component';
       { path: 'temp', component: TempComponent },
     ])
   ],
-  providers: [],
+  providers: [FetchDataComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

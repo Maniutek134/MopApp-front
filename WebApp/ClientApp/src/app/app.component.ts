@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
+import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-}
+
+  //public chart = []
+  //constructor(private _weather: FetchDataComponent) { }
+
+  
+  }
+ 
+
