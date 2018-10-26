@@ -21,7 +21,6 @@ export class ChartComponent {
   }
 
 
-
   ngOnInit() {
     this.dailyForecast()
       .subscribe(res => {
@@ -33,7 +32,7 @@ export class ChartComponent {
         let weatherDates = []
         alldates.forEach((res) => {
           let jsdate = new Date(res * 1000)
-          weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
+          weatherDates.push(jsdate.toLocaleTimeString('en', {year:'numeric', month: 'numeric', day: 'numeric'}))
         })
 
         console.log(weatherDates);
@@ -57,11 +56,14 @@ export class ChartComponent {
           },
           options: {
             legend: {
-              display: false
+              display: true
             },
             scales: {
               xAxes: [{
-                display: true
+                type: 'time',
+                time: {
+                  unit:'day'
+                }
               }],
               yAxes: [{
                 display: true

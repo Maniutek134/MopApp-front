@@ -15,8 +15,8 @@ export class FetchDataComponent {
   public currentCount = 0;
 
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
+  constructor(http: HttpClient) {
+    http.get<WeatherForecast[]>('http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/routes/').subscribe(result => {
       this.forecasts = result;
     }, error => console.error(error));
   }
@@ -37,8 +37,7 @@ export class FetchDataComponent {
 }
 //baseUrl + 'api/SampleData/WeatherForecasts'
 interface WeatherForecast {
-  dateFormatted: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  id: string;
+  name: number;
+
 }
