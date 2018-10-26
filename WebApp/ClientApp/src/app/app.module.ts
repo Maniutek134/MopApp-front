@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TempComponent } from './temp/temp.component';
+import { ChartComponent } from './chart/chart.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TempComponent } from './temp/temp.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    TempComponent
+    TempComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,9 +32,10 @@ import { TempComponent } from './temp/temp.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'temp', component: TempComponent },
+      { path: 'chart', component: ChartComponent },
     ])
   ],
-  providers: [FetchDataComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,4 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<!--
+
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
@@ -27,12 +26,7 @@
 
 <p>Current count: <strong>{{ currentCount }}</strong></p>
 
-<button (click)="putData(summary,temper)">Increment</button>
-<input type="number" name="temper" />
-<input type="text" name="summary" />-->
+<button (click)="putData(summary)">Send</button>
+<input type="text" name="summary" />
 
-<p *ngIf="!chart"><em>Loading...</em></p>
 
-<div *ngIf="chart">
-  <canvas id="canvas">{{ chart}}</canvas>
-</div>

@@ -32,10 +32,10 @@ namespace WebApp.Controllers
         }
 
         [HttpPost("[action]")]
-        public void PutWeatherForecast(string summ, int temp )
+        public void PutWeatherForecast(string summ )
         {
             Summaries.Append(summ);
-            Temperarures.Append(temp);
+
         }
 
 

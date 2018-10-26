@@ -32,6 +32,11 @@
                 <span class='glyphicon glyphicon-th-list'></span> Temperature
               </a>
             </li>
+            <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/chart"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-education'></span> Chart
+              </a>
+            </li>
           </ul>
         </div>
     </div>
