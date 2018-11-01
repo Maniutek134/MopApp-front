@@ -12,63 +12,46 @@ export class HomeComponent {
 
   constructor(private _http: HttpClient) { }
 
-  dailyForecast() {
-    return this._http.get("https://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=b1b15e88fa797225412429c1c50c122a1")
+  weeklyTemp() {
+    return this._http.get("http://demo9791456.mockable.io/GetAvgTemp")
       .map(result => result);
   }
 
 
   ngOnInit() {
-    this.dailyForecast()
+    this.weeklyTemp()
       .subscribe(res => {
 
-        let temp_max = res['list'].map(result => result.temp.max)
-        let temp_min = res['list'].map(result => result.temp.min)
-        let alldates = res['list'].map(result => result.dt)
+        let allTemps = res['temps']//.map(result => result)
+        let allWeekNumbers = Array.from({ length:52 },(v,k)=> k+1)
+        
+        //allTemps.forEach((res) => {
+        //  let jsdate = new Date(res * 1000)
+        //  weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'numeric', day: 'numeric' }))
+        //})
 
-        let weatherDates = []
-        alldates.forEach((res) => {
-          let jsdate = new Date(res * 1000)
-          weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'numeric', day: 'numeric' }))
-        })
-
-        console.log(weatherDates);
+        console.log(allTemps);
 
         this.chart = new Chart('canvas', {
-          type: 'line',
+          type: 'bar',
           data: {
-            labels: weatherDates,
+            labels: allWeekNumbers,
             datasets: [
               {
-                data: temp_max,
+                data: allTemps,
                 borderColor: '#3cba9f',
                 fill: false
-              },
-              {
-                data: temp_min,
-                borderColor: '#ffcc00',
-                fill: false
-              },
+              }
             ]
           },
           options: {
             legend: {
               display: true
-            },
-            scales: {
-              xAxes: [{
-                type: 'time',
-                time: {
-                  unit: 'day'
-                }
-              }],
-              yAxes: [{
-                display: true
-              }]
             }
           }
         });
       })
+
   }
 
 }
