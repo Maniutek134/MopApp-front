@@ -3,23 +3,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-devices-details',
+  templateUrl: './devices-details.component.html',
 })
-export class HomeComponent {
+export class DevicesDetailsComponent {
   public chart = []
-
+  public phonesTemp = []
 
   constructor(private _http: HttpClient) { }
 
-  weeklyAvgTemp() {
-    return this._http.get("http://demo9791456.mockable.io/GetAvgTemp")
+  weeklyAvgTempForAllDev() {
+    return this._http.get("http://demo9791456.mockable.io/GetAllAvgTempDevices")
       .map(result => result);
   }
 
 
   ngOnInit() {
-    this.weeklyAvgTemp()
+    this.weeklyAvgTempForAllDev()
       .subscribe(res => {
 
         let allTemps = res['temps']//.map(result => result)
@@ -32,28 +32,14 @@ export class HomeComponent {
 
         console.log(allTemps);
 
-        this.chart = new Chart('canvas', {
-          type: 'bar',
-          data: {
-            labels: allWeekNumbers,
-            datasets: [
-              {
-                label: "Avg Temp",
-                data: allTemps,
-                borderColor: '#19EF0B',
-                backgroundColor: '#19EF0B',
-                fill: false
-              }
-            ]
-          },
-          options: {
-            legend: {
-              display: true,
-            }
-          }
-        });
       })
 
   }
 
+}
+
+interface PhoneTemp {
+  id: number;
+  name: string;
+  [temps: number]: any;
 }

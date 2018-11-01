@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TempComponent } from './temp/temp.component';
 import { ChartComponent } from './chart/chart.component';
+import { DevicesDetailsComponent } from './devices-details/devices-details.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ChartComponent } from './chart/chart.component';
     CounterComponent,
     FetchDataComponent,
     TempComponent,
-    ChartComponent
+    ChartComponent,
+    DevicesDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +35,7 @@ import { ChartComponent } from './chart/chart.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'temp', component: TempComponent },
       { path: 'chart', component: ChartComponent },
+      {path: 'devices-details', component: DevicesDetailsComponent}
     ])
   ],
   providers: [],
