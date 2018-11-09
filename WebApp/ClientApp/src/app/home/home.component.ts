@@ -8,38 +8,35 @@ import { Chart } from 'chart.js';
 })
 export class HomeComponent {
   public chart = []
-
+  public devicesAvgTemp: DeviceAvgTemp[];
+  public allTypes: string[];
+  public allTemps: number[];
 
   constructor(private _http: HttpClient) { }
 
-  weeklyAvgTemp() {
-    return this._http.get("http://demo9791456.mockable.io/GetAvgTemp")
+
+  getAllDevicesAvgTemp() {
+    return this._http.get<DeviceAvgTemp[]>("http://demo9791456.mockable.io/plot")
       .map(result => result);
   }
 
-
   ngOnInit() {
-    this.weeklyAvgTemp()
-      .subscribe(res => {
+    this.getAllDevicesAvgTemp().
+      subscribe(result => {
 
-        let allTemps = res['temps']//.map(result => result)
-        let allWeekNumbers = Array.from({ length:52 },(v,k)=> k+1)
-        
-        //allTemps.forEach((res) => {
-        //  let jsdate = new Date(res * 1000)
-        //  weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'numeric', day: 'numeric' }))
-        //})
+        this.devicesAvgTemp=result['list'];
 
-        console.log(allTemps);
+        this.allTemps = result['list'].map(result => result.avgTemp)
+        this.allTypes = result['list'].map(result => result.type)
 
         this.chart = new Chart('canvas', {
           type: 'bar',
           data: {
-            labels: allWeekNumbers,
+            labels: this.allTypes,
             datasets: [
               {
-                label: "Avg Temp",
-                data: allTemps,
+                label: "Avg Temps",
+                data: this.allTemps,
                 borderColor: '#19EF0B',
                 backgroundColor: '#19EF0B',
                 fill: false
@@ -52,8 +49,16 @@ export class HomeComponent {
             }
           }
         });
-      })
 
+      })
+  
   }
 
+
+}
+
+interface DeviceAvgTemp {
+  id: number;
+  type: string;
+  avgTemp: number;
 }

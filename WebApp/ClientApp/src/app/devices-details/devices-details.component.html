@@ -1,16 +1,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 <div>
-  <label>Summary: </label>
-  <select (change)="deviceTempUpdate($event.target.value)">
+  <label>Chose device: </label>
+  <select (change)="deviceChoice($event.target.value)">
     <option value="0">--All--</option>
-    <option *ngFor="let deviceTemp of devicesTemp" value={{deviceTemp.type}}>
-      {{deviceTemp.type}}
+    <option *ngFor="let device of devices" value={{device.type}}>
+      {{device.type}}
     </option>
   </select>
   <p *ngIf="!chart"><em>Loading...</em></p>
 
   <div *ngIf="chart">
-    <canvas id="canvas">{{ chart}}</canvas>
+    <canvas id="canvas">{{chart}}</canvas>
   </div>
 </div>
