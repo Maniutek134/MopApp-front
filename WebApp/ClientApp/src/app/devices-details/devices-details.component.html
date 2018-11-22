@@ -4,8 +4,8 @@
   <label>Chose device: </label>
   <select (change)="deviceChoice($event.target.value)">
     <option value="0">--All--</option>
-    <option *ngFor="let device of devices" value={{device.type}}>
-      {{device.type}}
+    <option *ngFor="let device of devices" value={{device.id}}>
+      {{device.id}}
     </option>
   </select>
   <p *ngIf="!chart"><em>Loading...</em></p>

@@ -6,7 +6,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs";
-import { create } from 'domain';
+
 
 @Component({
   selector: 'app-devices-details',
@@ -19,20 +19,19 @@ export class DevicesDetailsComponent {
   public devices: Device[];
   public allWeekNumbers: number[];
   public allTemps: number[];
-  public CHART = document.getElementById("canvas");
-  public myChart: Chart;
+  
 
   constructor(private _http: HttpClient) { }
 
 
   getAllDevices() {
-    return this._http.get<Device[]>("http://demo9791456.mockable.io/devices")
+    return this._http.get<Device[]>("http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/temperature/devices")
       .map(result => result);
    
   }
 
   getAvgWeeklyTemps(id: number) {
-    return this._http.get("http://demo9791456.mockable.io/average/" + id.toString())
+    return this._http.get<AvgWeekTemp[]>("http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/temperature/plot/" + id.toString())
       .map(result => result);
 
   }
@@ -44,7 +43,7 @@ export class DevicesDetailsComponent {
       labels: this.allWeekNumbers,
       datasets: [
         {
-          label: "Avg Temp of " + device.type,
+          label: "Avg Temp of " + device.name,
           data: this.allTemps,
           borderColor: '#19EF0B',
           backgroundColor: '#19EF0B',
@@ -73,25 +72,26 @@ export class DevicesDetailsComponent {
     this.getAllDevices()
       .subscribe(result => {
 
-        this.devices = result['list'];
+        this.devices = result;
       })
 
     this.allWeekNumbers = Array.from({ length: 52 }, (v, k) => k + 1);
     //his.chartCreate();
   }
 
-  deviceChoice(deviceType: any) {
+  deviceChoice(deviceId: number) {
 
     //delete this.chart;
 
     let currentDevice = this.devices.filter((item) => {
-      return item.type == deviceType
+      return item.id == deviceId;
     });
 
     this.getAvgWeeklyTemps(currentDevice[0].id) //this is how filter works.. rwturns the array of elemnts that suit to filter properties
       .subscribe(result => {
-        this.allTemps = result["temps"];
 
+        this.allTemps = result.map(result => result.avgResult)
+  
         //this.chartUpdate(this.chart, currentDevice[0]);
 
        // if (this.myChart)  this.myChart.destroy(); //destroy prev chart instance
@@ -102,7 +102,7 @@ export class DevicesDetailsComponent {
             labels: this.allWeekNumbers,
             datasets: [
               {
-                label: "Avg Temp of " + currentDevice[0].type,
+                label: "Avg Temp of " + currentDevice[0].name,
                 data: this.allTemps,
                 borderColor: '#19EF0B',
                 backgroundColor: '#19EF0B',
@@ -127,7 +127,13 @@ export class DevicesDetailsComponent {
 
 interface Device {
   id: number;
-  type: string;
+  name: string;
+  average: number;
+}
+
+interface AvgWeekTemp {
+  week: number;
+  avgResult: number
 }
 
 

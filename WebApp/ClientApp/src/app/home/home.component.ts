@@ -9,14 +9,14 @@ import { Chart } from 'chart.js';
 export class HomeComponent {
   public chart = []
   public devicesAvgTemp: DeviceAvgTemp[];
-  public allTypes: string[];
+  public allNames: string[];
   public allTemps: number[];
 
   constructor(private _http: HttpClient) { }
 
 
   getAllDevicesAvgTemp() {
-    return this._http.get<DeviceAvgTemp[]>("http://demo9791456.mockable.io/plot")
+    return this._http.get<DeviceAvgTemp[]>("http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/temperature/devices")
       .map(result => result);
   }
 
@@ -24,15 +24,15 @@ export class HomeComponent {
     this.getAllDevicesAvgTemp().
       subscribe(result => {
 
-        this.devicesAvgTemp=result['list'];
+        this.devicesAvgTemp=result;
 
-        this.allTemps = result['list'].map(result => result.avgTemp)
-        this.allTypes = result['list'].map(result => result.type)
+        this.allTemps = result.map(result => result.average)
+        this.allNames = result.map(result => result.name)
 
         this.chart = new Chart('canvas', {
           type: 'bar',
           data: {
-            labels: this.allTypes,
+            labels: this.allNames,
             datasets: [
               {
                 label: "Avg Temps",
@@ -59,6 +59,6 @@ export class HomeComponent {
 
 interface DeviceAvgTemp {
   id: number;
-  type: string;
-  avgTemp: number;
+  name: string;
+  average: number;
 }
