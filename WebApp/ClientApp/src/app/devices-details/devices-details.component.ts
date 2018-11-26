@@ -6,6 +6,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs";
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 
 @Component({
@@ -17,8 +18,10 @@ export class DevicesDetailsComponent {
 
   public chart= [];
   public devices: Device[];
+  public avgWeekTemps: AvgWeekTemp[];
   public allWeekNumbers: number[];
   public allTemps: number[];
+  public currentDevice: number;
   
 
   constructor(private _http: HttpClient) { }
@@ -81,7 +84,7 @@ export class DevicesDetailsComponent {
 
   deviceChoice(deviceId: number) {
 
-    //delete this.chart;
+    this.currentDevice = deviceId;
 
     let currentDevice = this.devices.filter((item) => {
       return item.id == deviceId;
@@ -90,6 +93,7 @@ export class DevicesDetailsComponent {
     this.getAvgWeeklyTemps(currentDevice[0].id) //this is how filter works.. rwturns the array of elemnts that suit to filter properties
       .subscribe(result => {
 
+        this.avgWeekTemps = result;
         this.allTemps = result.map(result => result.avgResult)
   
         //this.chartUpdate(this.chart, currentDevice[0]);
@@ -117,6 +121,16 @@ export class DevicesDetailsComponent {
           }
         });
       })
+  }
+
+  saveDataToCSV() {
+    let date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1; //Jan == 0
+    var day = date.getDate();
+    
+    new Angular5Csv(this.avgWeekTemps, 'avgWeekTemps_' + ' DeviceId_' + this.currentDevice + '_' + year + month + day);
+
   }
       
  }

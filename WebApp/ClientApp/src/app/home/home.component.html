@@ -6,3 +6,5 @@
 <div *ngIf="chart">
   <canvas id="canvas">{{ chart}}</canvas>
 </div>
+
+<button (click)="saveDataToCSV()">Download as .csv</button>

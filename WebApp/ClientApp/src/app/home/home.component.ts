@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Chart } from 'chart.js';
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 @Component({
   selector: 'app-home',
@@ -52,6 +53,15 @@ export class HomeComponent {
 
       })
   
+  }
+
+  saveDataToCSV() {
+    let date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1; //Jan == 0
+    var day = date.getDate();
+
+    new Angular5Csv(this.devicesAvgTemp, 'avgYearAllDevTemps_' + year + month + day);
   }
 
 
