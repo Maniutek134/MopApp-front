@@ -12,6 +12,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { TempComponent } from './temp/temp.component';
 import { ChartComponent } from './chart/chart.component';
 import { DevicesDetailsComponent } from './devices-details/devices-details.component';
+import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { DevicesDetailsComponent } from './devices-details/devices-details.compo
     FetchDataComponent,
     TempComponent,
     ChartComponent,
-    DevicesDetailsComponent
+    DevicesDetailsComponent,
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +39,10 @@ import { DevicesDetailsComponent } from './devices-details/devices-details.compo
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'temp', component: TempComponent },
       { path: 'chart', component: ChartComponent },
-      {path: 'devices-details', component: DevicesDetailsComponent}
+      { path: 'devices-details', component: DevicesDetailsComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'admin', component: AdminComponent },
+
     ])
   ],
   providers: [],

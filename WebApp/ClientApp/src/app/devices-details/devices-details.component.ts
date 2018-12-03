@@ -16,7 +16,7 @@ import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 export class DevicesDetailsComponent {
 
 
-  public chart= [];
+  public chart = [];
   public devices: Device[];
   public avgWeekTemps: AvgWeekTemp[];
   public allWeekNumbers: number[];
@@ -98,8 +98,8 @@ export class DevicesDetailsComponent {
   
         //this.chartUpdate(this.chart, currentDevice[0]);
 
-       // if (this.myChart)  this.myChart.destroy(); //destroy prev chart instance
-
+        // if (this.myChart)  this.myChart.destroy(); //destroy prev chart instance
+        //this.chart.destroy();
         this.chart = new Chart('canvas', {
           type: 'line',
           data: {
