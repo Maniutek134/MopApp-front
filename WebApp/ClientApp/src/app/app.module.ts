@@ -14,6 +14,7 @@ import { ChartComponent } from './chart/chart.component';
 import { DevicesDetailsComponent } from './devices-details/devices-details.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     ChartComponent,
     DevicesDetailsComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
