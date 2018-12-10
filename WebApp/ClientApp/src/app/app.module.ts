@@ -7,15 +7,13 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { TempComponent } from './temp/temp.component';
-import { ChartComponent } from './chart/chart.component';
 import { DevicesDetailsComponent } from './devices-details/devices-details.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
-
+import { AuthGuard } from "./auth.guard";
+import { AddUserComponent } from './add-user/add-user.component';
+import { GetUsersComponent } from './get-users/get-users.component'
 
 
 @NgModule({
@@ -23,13 +21,11 @@ import { AuthService } from './auth.service';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    TempComponent,
-    ChartComponent,
     DevicesDetailsComponent,
     AdminComponent,
     LoginComponent,
+    AddUserComponent,
+    GetUsersComponent,
   
   ],
   imports: [
@@ -37,18 +33,32 @@ import { AuthService } from './auth.service';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'temp', component: TempComponent },
-      { path: 'chart', component: ChartComponent },
-      { path: 'devices-details', component: DevicesDetailsComponent },
-      { path: 'login', component: LoginComponent },
+      {
+        path: 'home',
+        component: HomeComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'devices-details',
+        component: DevicesDetailsComponent,
+        canActivate: [AuthGuard]
+      },
+      { path: '', component: LoginComponent },
       { path: 'admin', component: AdminComponent },
-
+      {
+        path: 'add-user',
+        component: AddUserComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'get-users',
+        component: GetUsersComponent,
+        canActivate: [AuthGuard]
+      }
     ])
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

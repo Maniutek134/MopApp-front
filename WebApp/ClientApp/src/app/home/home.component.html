@@ -2,9 +2,12 @@
 
 
 <p *ngIf="!chart"><em>Loading...</em></p>
-
 <div *ngIf="chart">
   <canvas id="canvas">{{ chart}}</canvas>
 </div>
 
 <button (click)="saveDataToCSV()">Download as .csv</button>
+
+
+<app-nav-menu></app-nav-menu>
+

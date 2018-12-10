@@ -13,7 +13,7 @@
         <div class='navbar-collapse collapse' [ngClass]='{ "in": isExpanded }'>
           <ul class='nav navbar-nav'>
             <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-              <a [routerLink]='["/"]' (click)='collapse()'>
+              <a [routerLink]='["/home"]' (click)='collapse()'>
                 <span class='glyphicon glyphicon-home'></span> Home
               </a>
             </li>
@@ -23,23 +23,13 @@
               </a>
             </li>
             <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/counter"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-education'></span> Counter
+              <a [routerLink]='["/add-user"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-education'></span> Add User
               </a>
             </li>
             <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Fetch data
-              </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/temp"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Temperature
-              </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/chart"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-education'></span> Chart
+              <a [routerLink]='["/get-users"]' (click)='collapse()'>
+                <span class='glyphicon glyphicon-education'></span> Show Users
               </a>
             </li>
           </ul>
