@@ -14,7 +14,8 @@ import { ChartComponent } from './chart/chart.component';
 import { DevicesDetailsComponent } from './devices-details/devices-details.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
-import { AuthComponent } from './auth/auth.component';
+import { AuthService } from './auth.service';
+
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { AuthComponent } from './auth/auth.component';
     DevicesDetailsComponent,
     AdminComponent,
     LoginComponent,
-    AuthComponent
+  
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -47,7 +48,7 @@ import { AuthComponent } from './auth/auth.component';
 
     ])
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
