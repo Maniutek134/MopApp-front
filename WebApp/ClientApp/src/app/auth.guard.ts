@@ -4,13 +4,22 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 
 @Injectable()
-export class AuthUserGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.auth.isUserLogged;
+
+    const expectedRole = next.data.expectedRole;
+
+    if (expectedRole == 'admin') {
+      return this.auth.isAdminLogged
+    }
+    else {
+      return this.auth.isUserLogged
+    }
+
   }
 }

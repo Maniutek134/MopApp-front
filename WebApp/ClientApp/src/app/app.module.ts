@@ -11,7 +11,7 @@ import { DevicesDetailsComponent } from './devices-details/devices-details.compo
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
-import { AuthUserGuard } from "./auth.user.guard";
+import { AuthGuard } from './auth.guard';
 import { AddUserComponent } from './add-user/add-user.component';
 import { GetUsersComponent } from './get-users/get-users.component'
 
@@ -25,7 +25,7 @@ import { GetUsersComponent } from './get-users/get-users.component'
     AdminComponent,
     LoginComponent,
     AddUserComponent,
-    GetUsersComponent,
+    GetUsersComponent
   
   ],
   imports: [
@@ -37,28 +37,40 @@ import { GetUsersComponent } from './get-users/get-users.component'
         path: 'home',
         component: HomeComponent,
         pathMatch: 'full',
-        canActivate: [AuthUserGuard]
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'user'
+        } 
       },
       {
         path: 'devices-details',
         component: DevicesDetailsComponent,
-        canActivate: [AuthUserGuard]
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'user'
+        } 
       },
       { path: '', component: LoginComponent },
       { path: 'admin', component: AdminComponent },
       {
         path: 'add-user',
         component: AddUserComponent,
-        canActivate: [AuthUserGuard]
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'admin'
+        } 
       },
       {
         path: 'get-users',
         component: GetUsersComponent,
-        canActivate: [AuthUserGuard]
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'admin'
+        } 
       }
     ])
   ],
-  providers: [AuthService, AuthUserGuard],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
