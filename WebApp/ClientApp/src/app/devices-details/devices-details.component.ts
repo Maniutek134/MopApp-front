@@ -28,13 +28,13 @@ export class DevicesDetailsComponent {
 
 
   getAllDevices() {
-    return this._http.get<Device[]>("http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/temperature/devices")
+    return this._http.get<Device[]>("http://ec2-18-195-99-124.eu-central-1.compute.amazonaws.com/api/temperature/devices")
       .map(result => result);
    
   }
 
   getAvgWeeklyTemps(id: number) {
-    return this._http.get<AvgWeekTemp[]>("http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/temperature/plot/" + id.toString())
+    return this._http.get<AvgWeekTemp[]>("http://ec2-18-195-99-124.eu-central-1.compute.amazonaws.com/api/temperature/plot/" + id.toString())
       .map(result => result);
 
   }

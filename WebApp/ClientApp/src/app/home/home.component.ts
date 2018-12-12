@@ -17,7 +17,7 @@ export class HomeComponent {
 
 
   getAllDevicesAvgTemp() {
-    return this._http.get<DeviceAvgTemp[]>("http://ec2-18-184-187-189.eu-central-1.compute.amazonaws.com/api/temperature/devices")
+    return this._http.get<DeviceAvgTemp[]>("http://ec2-18-195-99-124.eu-central-1.compute.amazonaws.com/api/temperature/devices")
       .map(result => result);
   }
 
