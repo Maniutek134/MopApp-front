@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private Auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) { }
   private errorMsg;
 
   ngOnInit() {
@@ -21,27 +21,21 @@ export class LoginComponent implements OnInit {
     const username = target.querySelector('#username').value
     const password = target.querySelector('#password').value
 
-    this.Auth.loginUser(username, password).subscribe(
+    this.auth.loginUser(username, password).subscribe(
       result => {
       if (result.password == password && result.username == username) {
 
-        this.Auth.setLoginUserStatus(true);
+        this.auth.setLoginUserStatus(true);
 
         if (result.username == "admin") {
-          this.Auth.setLoginAdminStatus(true)
+          this.auth.setLoginAdminStatus(true)
         }
 
         this.router.navigate(['home'])
       }
-      //else {
-      //  window.alert("bad credentials");
-      //}
     },
       error => window.alert(error)
     )
-    //var fx = this.Auth.login;
-    //let result = fx.apply(this.Auth, [username,password]);
-    
-    //console.log(result)
+
   }
 }

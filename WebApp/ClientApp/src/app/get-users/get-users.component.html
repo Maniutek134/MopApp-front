@@ -1,4 +1,27 @@
-<p>
-  get-users works!
-</p>
+<h1>Users</h1>
+
+<p>This component demonstrates all users .</p>
+
+<p *ngIf="!getUsersResponseTable"><em>Loading...</em></p>
+
+<table class='table' *ngIf="getUsersResponseTable">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>forename</th>
+      <th>surname</th>
+      <th>email</th>
+      <th>role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let getUsersResponse of getUsersResponseTable">
+      <td>{{ getUsersResponse.id }}</td>
+      <td>{{ getUsersResponse.forename }}</td>
+      <td>{{ getUsersResponse.surname }}</td>
+      <td>{{ getUsersResponse.email }}</td>
+      <td>{{ getUsersResponseTable[0].roles[(getUsersResponse.id)-1].name}}</td>
+    </tr>
+  </tbody>
+</table>
 <app-nav-menu></app-nav-menu>

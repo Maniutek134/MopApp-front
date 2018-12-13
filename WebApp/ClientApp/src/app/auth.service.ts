@@ -29,23 +29,17 @@ export class AuthService {
   get isAdminLogged() {
     return this.loginAdminStatus
   }
-  //setLoginResponse(loginResponse: LoginResponse) {
-  //  this.loginResponse = loginResponse
-  //}
-
-  //get isLogged() {
-  //  return this.loginResponse.isLogged
-  //}
+ 
 
   loginUser(username, password) {
+
     let body = new HttpParams()
       .set('username', username)
       .set('password', password);
-    //let body = { username:'admin', password:'dupa8' };
+
     let headers = new Headers({ 'Content-Type': 'application/json'});
 
     headers.append('Authorization', "No Auth");
-    //let options = new RequestOptions({ headers: headers });
 
     return this._http.post<LoginUserResponse>("http://ec2-18-195-99-124.eu-central-1.compute.amazonaws.com/api/user/authenticate", body)
       .map(result => result)
@@ -57,9 +51,23 @@ export class AuthService {
     return Observable.throw(error.message)
   }
  
+  getAllUsers() {
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + 'am9obnk6ZHVwYTk='
+      })
+    };
+
+    return this._http.get<GetUsersResponse[]>("http://ec2-18-195-99-124.eu-central-1.compute.amazonaws.com/api/user", httpOptions)
+      .map(result => result);
+
+  }
 
 
 }
+
 interface LoginUserResponse {
   id: number,
   forename: string,
@@ -71,7 +79,15 @@ interface LoginUserResponse {
 
 }
 
-interface LoginUser {
-  username: string,
-  password: string
+interface GetUsersResponse {
+  id: number,
+  forename: string,
+  surename: string,
+  email: string,
+  roles: UserRole[]
+}
+
+interface UserRole {
+  id: number,
+  name: string
 }
