@@ -13,7 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { AddUserComponent } from './add-user/add-user.component';
-import { GetUsersComponent } from './get-users/get-users.component'
+import { GetUsersComponent } from './get-users/get-users.component';
+import { LogoutComponent } from './logout/logout.component'
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { GetUsersComponent } from './get-users/get-users.component'
     AdminComponent,
     LoginComponent,
     AddUserComponent,
-    GetUsersComponent
+    GetUsersComponent,
+    LogoutComponent
   
   ],
   imports: [
@@ -67,6 +69,14 @@ import { GetUsersComponent } from './get-users/get-users.component'
         data: {
           expectedRole: 'admin'
         } 
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent,
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'user'
+        }
       }
     ])
   ],
