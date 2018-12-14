@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Chart } from 'chart.js';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { Response, RequestOptions, ResponseContentType } from '@angular/http';
+import { saveAs } from 'file-saver';
+import { Observable } from 'rxjs';
+//import { ConfigService } from 'app/common/services/config.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +17,8 @@ export class HomeComponent {
   public allNames: string[];
   public allTemps: number[];
 
+
+
   constructor(private _http: HttpClient) { }
 
 
@@ -21,11 +27,13 @@ export class HomeComponent {
       .map(result => result);
   }
 
+
+
   ngOnInit() {
     this.getAllDevicesAvgTemp().
       subscribe(result => {
 
-        this.devicesAvgTemp=result;
+        this.devicesAvgTemp = result;
 
         this.allTemps = result.map(result => result.average)
         this.allNames = result.map(result => result.name)
@@ -52,7 +60,7 @@ export class HomeComponent {
         });
 
       })
-  
+
   }
 
   saveDataToCSV() {
@@ -65,6 +73,9 @@ export class HomeComponent {
   }
 
 
+
+
+  
 }
 
 interface DeviceAvgTemp {

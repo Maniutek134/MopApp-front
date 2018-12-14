@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { DevicesDetailsComponent } from './devices-details/devices-details.component';
-import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -23,7 +22,6 @@ import { LogoutComponent } from './logout/logout.component'
     NavMenuComponent,
     HomeComponent,
     DevicesDetailsComponent,
-    AdminComponent,
     LoginComponent,
     AddUserComponent,
     GetUsersComponent,
@@ -53,7 +51,6 @@ import { LogoutComponent } from './logout/logout.component'
         } 
       },
       { path: '', component: LoginComponent },
-      { path: 'admin', component: AdminComponent },
       {
         path: 'add-user',
         component: AddUserComponent,
